@@ -1,0 +1,19 @@
+{
+  "cwd": "D:\\Projects\\gramitei",
+  "type": [
+    "web",
+    "pwa"
+  ],
+  "name": "gramitei",
+  "framework": "vue",
+  "template": "tabs",
+  "bundler": "vite",
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}
