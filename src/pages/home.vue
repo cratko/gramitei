@@ -3,9 +3,9 @@
     <!-- Top Navbar -->
      
     <f7-navbar>
-      <f7-nav-title>Gramitei12 <span class="subtitle-nav">Market</span></f7-nav-title>
+      <f7-nav-title>Gramitei <span class="subtitle-nav">Market</span></f7-nav-title>
       <f7-nav-right>
-        <f7-link icon-ios="f7:add" icon-md="material:add" panel-open="right" icon-color="blue"></f7-link>
+        <f7-link icon-ios="f7:add" icon-md="material:add" panel-open="right"></f7-link>
       </f7-nav-right>
     </f7-navbar>
 
