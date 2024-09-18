@@ -1,7 +1,6 @@
 {
   "cwd": "D:\\Projects\\gramitei",
   "type": [
-    "web",
     "pwa"
   ],
   "name": "gramitei",
@@ -10,9 +9,9 @@
   "bundler": "vite",
   "cssPreProcessor": false,
   "theming": {
-    "customColor": false,
-    "color": "#007aff",
-    "darkMode": false,
+    "customColor": true,
+    "color": "#d97878",
+    "darkMode": true,
     "iconFonts": true
   },
   "customBuild": false

@@ -8,7 +8,6 @@ Framework7 app created with following options:
 {
   "cwd": "D:\\Projects\\gramitei",
   "type": [
-    "web",
     "pwa"
   ],
   "name": "gramitei",
@@ -17,9 +16,9 @@ Framework7 app created with following options:
   "bundler": "vite",
   "cssPreProcessor": false,
   "theming": {
-    "customColor": false,
-    "color": "#007aff",
-    "darkMode": false,
+    "customColor": true,
+    "color": "#d97878",
+    "darkMode": true,
     "iconFonts": true
   },
   "customBuild": false

@@ -1,4 +1,5 @@
 /* Your app custom styles here */
+/* Your app custom styles here */
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
 .tabbar-label {
@@ -16,7 +17,7 @@
 
 .navbar .title .subtitle-nav{
     font-size: 14px;
-    color: rgb(26, 90, 133);
+    color: #d97878;
 }
 
 .badge {

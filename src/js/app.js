@@ -26,6 +26,5 @@ const app = createApp(App);
 // Register Framework7 Vue components
 registerComponents(app);
 
-console.log(window.Telegram.WebApp)
 // Mount the app
 app.mount('#app');
