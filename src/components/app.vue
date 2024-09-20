@@ -71,7 +71,9 @@
           primary: '#d97878',
         },
         darkMode: true,
-
+        view: {
+          browserHistory: true,
+        },
 
         // App store
         store: store,
