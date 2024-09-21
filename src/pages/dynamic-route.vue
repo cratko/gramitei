@@ -35,10 +35,28 @@
   </f7-page>
 </template>
 <script>
+import { f7 } from 'framework7-vue';
+
+
+
+
 export default {
   props: {
     f7route: Object,
     f7router: Object,
   },
+  setup() {
+    const tg = window.Telegram.WebApp;
+
+    // Show the back button
+    tg.BackButton.show();
+
+    // Define what happens when the back button is clicked
+    const goBack = () => {
+      f7.view.main.router.navigate('/');
+    };
+
+    tg.BackButton.onClick(goBack);
+  }
 };
 </script>
