@@ -54,6 +54,7 @@ export default {
     // Define what happens when the back button is clicked
     const goBack = () => {
       f7.view.main.router.navigate('/');
+      tg.BackButton.hide();
     };
 
     tg.BackButton.onClick(goBack);
