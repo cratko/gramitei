@@ -2,7 +2,7 @@
   <f7-page>
     <f7-navbar title="Dynamic Route">
       <f7-nav-right>
-        <f7-link icon-md="material:close" @click="f7router.back()"></f7-link>
+        <f7-link icon-md="material:close" @click="f7router.navigate('/')"></f7-link>
       </f7-nav-right>
     </f7-navbar>
     <f7-block strong inset>

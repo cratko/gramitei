@@ -1,6 +1,5 @@
 <template>
   <f7-app v-bind="f7params">
-
     <!-- Left panel with cover effect-->
     <f7-panel right cover dark>
       <f7-view>
@@ -11,20 +10,23 @@
   
         </f7-page>
       </f7-view>
+      
     </f7-panel>
   
     <!-- Views/Tabs container -->
     <f7-views tabs class="safe-areas">
       <!-- Tabbar for switching views-tabs -->
       <f7-toolbar tabbar icons bottom>
-        <f7-link tab-link="#view-home" tab-link-active icon-ios="f7:house_fill" icon-md="material:apps" text="Маркет"></f7-link>
-        <!-- <f7-link tab-link="#view-catalog" icon-ios="f7:square_list_fill" icon-md="material:add" text="Catalog"></f7-link> -->
+        <f7-link tab-link="#view-catalog" icon-ios="f7:square_list_fill" icon-md="material:menu" text="Меню"></f7-link> 
+        
+        <f7-link tab-link="#view-home" tab-link-active icon-ios="f7:house_fill" icon-md="material:store" text="Маркет"></f7-link>
+        
         <f7-link tab-link="#view-settings" icon-ios="f7:gear" icon-md="material:person" text="Профиль"></f7-link>
       </f7-toolbar>
-  
+
       <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
-      <f7-view id="view-home" main tab tab-active url="/"></f7-view>
-  
+      <f7-view main tab-active id="view-home" name="home" tab url="/" :browser-history="true"></f7-view>
+   
       <!-- Catalog View -->
       <f7-view id="view-catalog" name="catalog" tab url="/catalog/"></f7-view>
   
@@ -61,6 +63,10 @@
   import store from '../js/store';
 
   export default {
+    props: {
+      f7route: Object,
+      f7router: Object,
+    },
     setup() {
 
       // Framework7 Parameters
@@ -72,7 +78,8 @@
         },
         darkMode: true,
         view: {
-          browserHistory: true,
+          //browserHistory: true,
+          //browserHistorySeparator: "",
         },
 
         // App store
@@ -96,9 +103,7 @@
       }
       onMounted(() => {
         f7ready(() => {
-
-
-          // Call F7 APIs here
+          
         });
       });
 
