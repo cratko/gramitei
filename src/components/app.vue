@@ -17,7 +17,7 @@
     <f7-views tabs class="safe-areas">
       <!-- Tabbar for switching views-tabs -->
       <f7-toolbar tabbar icons bottom>
-        <f7-link tab-link="#view-catalog" icon-ios="f7:square_list_fill" icon-md="material:menu" text="Меню"></f7-link> 
+        <f7-link tab-link="#view-menu" icon-ios="f7:square_list_fill" icon-md="material:menu" text="Меню"></f7-link> 
         
         <f7-link tab-link="#view-home" tab-link-active icon-ios="f7:house_fill" icon-md="material:store" text="Маркет"></f7-link>
         
@@ -28,7 +28,7 @@
       <f7-view main tab-active id="view-home" name="home" tab url="/" :browser-history="true"></f7-view>
    
       <!-- Catalog View -->
-      <f7-view id="view-catalog" name="catalog" tab url="/catalog/"></f7-view>
+      <f7-view id="view-menu" name="menu" tab url="/menu/"></f7-view>
   
       <!-- Settings View -->
       <f7-view id="view-settings" name="settings" tab url="/settings/"></f7-view>
