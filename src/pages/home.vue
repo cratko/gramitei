@@ -1,7 +1,6 @@
 <template>
   <f7-page name="home">
     <!-- Top Navbar -->
-     
     <f7-navbar>
       <f7-nav-title>Gramitei <span class="subtitle-nav">Market</span></f7-nav-title>
       <f7-nav-right>

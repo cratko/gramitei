@@ -11,7 +11,7 @@
       <f7-list strong dividers-ios outline-ios inset-md>
       
         <f7-list-item
-          title="Добавить услугу"
+          title="Добавить предложение"
           link="/test/"
           media
         >

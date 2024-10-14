@@ -1,20 +1,9 @@
 <template>
   <f7-app v-bind="f7params">
-    <!-- Left panel with cover effect-->
-    <f7-panel right cover dark>
-      <f7-view>
-        <f7-page>
-          <f7-navbar title="Left Panel"></f7-navbar>
-          <button class="button button-round">Добавить товар</button>
-          <button class="button button-round">Round</button>
-  
-        </f7-page>
-      </f7-view>
-      
-    </f7-panel>
-  
+    <f7-view id="view-preloader" name="preloader" tab url="/preloader/" v-if="isLoading"></f7-view>
+
     <!-- Views/Tabs container -->
-    <f7-views tabs class="safe-areas">
+    <f7-views tabs class="safe-areas" v-show="!isLoading">
       <!-- Tabbar for switching views-tabs -->
       <f7-toolbar tabbar icons bottom>
         <f7-link tab-link="#view-menu" icon-ios="f7:square_list_fill" icon-md="material:menu" text="Меню"></f7-link> 
@@ -50,8 +39,9 @@
             </f7-block>
           </f7-page>
         </f7-view>
+
       </f7-popup>
-      
+
     </f7-app>
 </template>
 <script>
@@ -95,24 +85,48 @@
       // Login screen data
       const username = ref('');
       const password = ref('');
+      const isLoading = ref(true);
+      let notificationFull;
 
-      const alertLoginData = () => {
-        f7.dialog.alert('Username: ' + username.value + '<br>Password: ' + password.value, () => {
-          f7.loginScreen.close();
-        });
+
+                  
+      function auth() {
+            fetch('https://reqres.in/api/users/200')
+          .then(response => {
+            if (!response.ok) {
+              if (!notificationFull) {
+              notificationFull = f7.notification.create({
+                  title: 'Проблемы с подключением',
+                  titleRightText: 'сейчас',
+                  subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                  closeTimeout: 3000,
+                });
+              }
+                notificationFull.open();
+                setTimeout(() => {
+                  auth();
+                }, 5000);
+                return;
+              }
+            response.json()
+          })
+          .then(commits => {
+            console.log(commits);
+          });
       }
-      onMounted(() => {
-        f7ready(() => {
-          
-        });
-      });
+
+
+
+      auth();
+
+  
 
       return {
         f7params,
         username,
         password,
-        alertLoginData
+        isLoading
       }
-    }
+    },
   }
 </script>

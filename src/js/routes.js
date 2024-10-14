@@ -1,6 +1,6 @@
 
 import HomePage from '../pages/home.vue';
-import AboutPage from '../pages/about.vue';
+import PreloaderPage from '../pages/preloader.vue';
 import FormPage from '../pages/form.vue';
 import MenuPage from '../pages/menu.vue';
 import ProductPage from '../pages/product.vue';
@@ -17,8 +17,8 @@ var routes = [
     component: HomePage,
   },
   {
-    path: '/about/',
-    component: AboutPage,
+    path: '/preloader/',
+    component: PreloaderPage,
   },
   {
     path: '/form/',
