@@ -80,12 +80,7 @@ import Categories from './categories.vue';
       const isLoading = ref(true);
       let notificationFull;
 
-
-                  
-      function auth() {
-            fetch('https://reqres.in/api/users/2')
-          .then(response => {
-            if (!response.ok) {
+            if (!store.dispatch('auth')) {
               if (!notificationFull) {
               notificationFull = f7.notification.create({
                   title: 'Проблемы с подключением',
@@ -99,20 +94,16 @@ import Categories from './categories.vue';
                   auth();
                 }, 5000);
                 return;
+              } else {
+                isLoading.value = false
               }
-            return response.json()
-          })
-          .then(data => {
-            console.log(data);
-            isLoading.value = false
-          });
-      }
+
 
 
 
       auth();
 
-      store.dispatch('auth');
+      
 
   
 

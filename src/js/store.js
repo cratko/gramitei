@@ -28,6 +28,9 @@ const store = createStore({
         })
       })
       .then( response => {
+        if (!response.ok) {
+          return false
+        }
         return response.json()
 
       })
