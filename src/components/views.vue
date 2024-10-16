@@ -44,9 +44,11 @@ export default{
 
 
         const user = await useStore('userGetter');  
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         console.log(store.state.userState)
         console.log(store.state.userState.token)
         console.log(user.value.token)
+        console.log(user.value)
         if (user.value.token) {
             isLoading.value = false;
         } 
