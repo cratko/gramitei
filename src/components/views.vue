@@ -44,8 +44,8 @@ export default{
 
         f7ready((f7) => { 
     f7.store.dispatch('auth').then(() => {
-        console.log(user.value.token);
-        if (user.value.token) {
+        console.log(user.value);
+        if (user.value) {
             isLoading.value = false;
         }
     });

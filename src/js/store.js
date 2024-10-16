@@ -33,7 +33,7 @@ const store = createStore({
         state.userState.data = tg.initDataUnsafe.user;
         dispatch('getCategories');
       });
-      return true
+      
     },
     getCategories({ state }) {
             fetch(url + 'private/offers/getCategories', {
@@ -54,7 +54,7 @@ const store = createStore({
 },
   getters: {
     userGetter({ state }) {
-      return state.userState;
+      return state.userState.token;
     }
   }
 })
