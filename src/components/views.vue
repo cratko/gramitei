@@ -41,32 +41,30 @@ export default {
 
         const user = useStore('userGetter');     
         let errorNotify;
-        f7.store.dispatch('auth')
-        
-        f7ready((f7) => {
-                function auth() {
-                    f7.store.dispatch('auth')
-                    if (!errorNotify) {
-                    errorNotify = f7.notification.create({
-                                    title: 'Проблемы с подключением',
-                                    titleRightText: 'сейчас',
-                                    subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                                    closeTimeout: 3000,
-                                    });
-                                }
-                    if (!user.value.token) {
-                        errorNotify.open()
-                        setInterval(() => auth(), 5000);
-                        return;
-                    } else {
-                        isLoading.value = false;
-                        return;
-                        
-                    }
-                }
-                auth();
-            });
-            return {isLoading}
+
+        function auth() {
+            f7.store.dispatch('auth')
+            if (!user.value.token) {
+                errorNotify.open()
+                setInterval(() => auth(), 5000);
+                if (!errorNotify) {
+                             errorNotify = f7.notification.create({
+                            title: 'Проблемы с подключением',
+                            titleRightText: 'сейчас',
+                            subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                            closeTimeout: 3000,
+                            });
+                        }
+                return;
+            } else {
+                isLoading.value = false;
+                return;
+                
+            }
+        }
+        auth();
+
+        return {isLoading}
     }
 
 };
