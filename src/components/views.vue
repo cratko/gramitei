@@ -34,6 +34,7 @@ import {
   useStore,
   f7ready
 } from 'framework7-vue';
+import { ref, onMounted } from 'vue';
 export default {
     setup() {
         const isLoading = ref(true);
