@@ -39,10 +39,10 @@ import { ref, onMounted } from 'vue';
 export default{
     setup() {
         const isLoading = ref(true);
+        const user = useStore('userGetter'); 
         let errorNotify;
 
         f7ready((f7) => { 
-            const user = useStore('userGetter'); 
             f7.store.dispatch('auth');
             console.log(user.value)
             console.log(user.value)
