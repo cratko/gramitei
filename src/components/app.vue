@@ -1,31 +1,6 @@
 <template>
   <f7-app v-bind="f7params">
-    <f7-view id="view-preloader" name="preloader" tab url="/preloader/" v-if="isLoading"></f7-view>
-
-    <!-- Views/Tabs container -->
-    <f7-views tabs class="safe-areas" v-show="!isLoading">
-      <!-- Tabbar for switching views-tabs -->
-      <f7-toolbar tabbar icons bottom>
-        <f7-link tab-link="#view-menu" icon-ios="f7:square_list_fill" icon-md="material:menu" text="Меню"></f7-link> 
-        
-        <f7-link tab-link="#view-home" tab-link-active icon-ios="f7:house_fill" icon-md="material:store" text="Маркет"></f7-link>
-        
-        <f7-link tab-link="#view-settings" icon-ios="f7:gear" icon-md="material:person" text="Профиль"></f7-link>
-      </f7-toolbar>
-
-      <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
-      <f7-view main tab-active id="view-home" name="home" tab url="/" :browser-history="true"></f7-view>
-   
-      <!-- Catalog View -->
-      <f7-view id="view-menu" name="menu" tab url="/menu/"></f7-view>
-  
-      <!-- Settings View -->
-      <f7-view id="view-settings" name="settings" tab url="/settings/"></f7-view>
-  
-    </f7-views>
-  
-  
-      <!-- Popup -->
+    <Views></Views>
 
 
     </f7-app>
@@ -40,6 +15,7 @@
   import { useStore } from 'framework7-vue';
 
 import Categories from './categories.vue';
+import Views from './views.vue';
 
   export default {
     props: {
@@ -47,7 +23,8 @@ import Categories from './categories.vue';
       f7router: Object,
     },
     components: {
-      Categories
+      Categories,
+      Views
     },
     setup() {
 
@@ -78,33 +55,6 @@ import Categories from './categories.vue';
       const username = ref('');
       const password = ref('');
       const isLoading = ref(true);
-      
-      f7ready((f7) => {     
-        const user = useStore('user');     
-        let errorNotify;
-        function auth() {
-          f7.store.dispatch('auth')
-          if (!errorNotify) {
-          errorNotify = f7.notification.create({
-                          title: 'Проблемы с подключением',
-                          titleRightText: 'сейчас',
-                          subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                          closeTimeout: 3000,
-                        });
-                      }
-                      
-          if (user === undefined) {
-            errorNotify.open()
-            setInterval(() => auth(), 5000);
-            console.log(user)
-            return;
-          } else {
-            return;
-          }
-        }
-        auth();
-      });
-
 
 
 

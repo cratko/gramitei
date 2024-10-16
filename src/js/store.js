@@ -7,14 +7,8 @@ const  tg = window.Telegram.WebApp;
 const store = createStore({
   state: {
     categories: [],
-    user: {}
+    userState: []
   },
-  getters: {
-    products({ state }) {
-      return state.products;
-    }
-  },
-
   actions: {
     auth({ state }) {
       fetch(url + 'public/user/auth', {
@@ -48,11 +42,11 @@ const store = createStore({
             state.users = users;
     })
   },
+},
   getters: {
-    user({ state }) {
-      return state.user;
+    userGetter({ state }) {
+      return state.userState;
     }
   }
-  },
 })
 export default store;
