@@ -45,8 +45,6 @@ export default {
         function auth() {
             f7.store.dispatch('auth')
             if (!user.value.token) {
-                errorNotify.open()
-                setInterval(() => auth(), 5000);
                 if (!errorNotify) {
                              errorNotify = f7.notification.create({
                             title: 'Проблемы с подключением',
@@ -55,6 +53,8 @@ export default {
                             closeTimeout: 3000,
                             });
                         }
+                        errorNotify.open()
+                        setInterval(() => auth(), 5000);
                 return;
             } else {
                 isLoading.value = false;
