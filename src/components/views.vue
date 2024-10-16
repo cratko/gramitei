@@ -36,8 +36,8 @@ import {
 } from 'framework7-vue';
 import { ref, onMounted } from 'vue';
 export default{
-    mounted() {   
-
+    setup() {
+        const isLoading = ref(true);
 
         f7.store.dispatch('auth')
 
@@ -47,12 +47,8 @@ export default{
         console.log(user.value)
         if (user.value.token) {
             isLoading.value = false;
-        }
-    },
-    setup() {
-        const isLoading = ref(true);
-
-        const user = useStore('userGetter');     
+        } 
+        
         let errorNotify;
 
         console.log(user.value.token)
