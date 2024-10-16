@@ -94,11 +94,11 @@ import Categories from './categories.vue';
                           closeTimeout: 3000,
                         });
                       }
-                      const user = store.getters.user
+                      const user = store.user
           if (user === undefined) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
-            console.log(store.getters.user)
+            console.log(store.user)
             return;
           } else {
             return;
