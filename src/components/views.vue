@@ -42,7 +42,7 @@ export default{
         const user = useStore('userGetter'); 
         let errorNotify;
 
-        ff7.store.dispatch('auth')
+        f7.store.dispatch('auth')
             .then(() => {
                 console.log(user.value.token);
             })
