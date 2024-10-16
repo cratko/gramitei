@@ -49,7 +49,11 @@ export default{
                  f7ready((f7) => {
                 function auth() {
                     f7.store.dispatch('auth')
-                    if (!user.value.token) {
+                    .then(() => {
+                        isLoading.value = false;
+                        return;
+                    })
+                    .catch(error => {
                         if (!errorNotify) {
                                     errorNotify = f7.notification.create({
                                     title: 'Проблемы с подключением',
@@ -60,13 +64,7 @@ export default{
                                 }
                                 errorNotify.open()
                                 setInterval(() => auth(), 5000);
-                        return;
-                    } else {
-                        isLoading.value = false;
-                        console.log(user.value.token)
-                        return;
-                        
-                    }
+                            })
                 }
                 auth();
             });
