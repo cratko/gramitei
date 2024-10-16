@@ -40,6 +40,9 @@ export default{
         const firstLoad = () => {
             f7.store.dispatch('auth')
         }
+        if (user.value.token) {
+            isLoading.value = false;
+        }
     },
     setup() {
         const isLoading = ref(true);
