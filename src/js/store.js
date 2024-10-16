@@ -33,7 +33,8 @@ const store = createStore({
 
       })
       .then(commits => {
-        console.log(commits.token)
+        console.log("QUERY 1")
+        console.log(commits)
         state.user = commits
       });
     },
