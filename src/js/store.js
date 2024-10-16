@@ -23,7 +23,6 @@ const store = createStore({
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        //make sure to serialize your JSON body
         body: JSON.stringify({
           telegram_init_data: tg.initData
         })
@@ -33,8 +32,8 @@ const store = createStore({
 
       })
       .then(commits => {
-        console.log(commits)
-        state.user = commits
+        state.user.token = commits.token
+        console.log(state.user)
       });
     },
     getCategories({ state }) {
