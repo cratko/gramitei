@@ -1,5 +1,4 @@
 <template>
-    {{ user }}
     <f7-view id="view-preloader" name="preloader" tab url="/preloader/" v-if="isLoading"></f7-view>
 
     <!-- Views/Tabs container -->
@@ -29,7 +28,6 @@
 </template>
 
 <script>
-import store from '../js/store.js';
 import {
   f7,
   useStore,
@@ -40,26 +38,15 @@ export default{
     setup() {
         const isLoading = ref(true);
         const user = useStore('userGetter'); 
+
         let errorNotify;
 
         f7.store.dispatch('auth')
             .then(() => {
-                console.log(user.value.token);
+                isLoading.value = false;
             })
             .catch(error => {
-                console.error('Error during authentication or fetching categories:', error);
-            });
-
-        return {isLoading}
-    }
-
-};
-
-        /*
-        if (user.value.token) {
-            isLoading.value = false;
-        } else {
-                f7ready((f7) => {
+                 f7ready((f7) => {
                 function auth() {
                     f7.store.dispatch('auth')
                     if (!user.value.token) {
@@ -83,7 +70,12 @@ export default{
                 }
                 auth();
             });
-            */
+            });
+
+        return {isLoading}
+    }
+
+};
 
 
 </script>
