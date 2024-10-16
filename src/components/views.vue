@@ -66,7 +66,8 @@ export default {
                 }
                 auth();
             });
-    
+            return {isLoading}
     }
+
 };
 </script>
