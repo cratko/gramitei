@@ -53,7 +53,8 @@ export default {
                                     closeTimeout: 3000,
                                     });
                                 }
-                    console.log(user.value.length)
+                    console.log(user)
+                    console.log(user.value)
                     console.log(!user.value.length)
                     if (!user.value.length) {
                         errorNotify.open()
