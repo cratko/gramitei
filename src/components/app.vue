@@ -92,7 +92,7 @@ import Categories from './categories.vue';
                         });
                       }
                       console.log(store.getters.user)
-          if (!store.getters.user) {
+          if (store.getters.user === undefined) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
             console.log(store.getters.user)
