@@ -38,12 +38,15 @@ import {
 import { ref, onMounted } from 'vue';
 export default{
     setup() {
-        const user = useStore('userGetter'); 
+        
 
-        f7.store.s
+        f7ready((f7) => { 
+            const user = useStore('userGetter'); 
+            f7.store.dispatch('auth');
+        });
         const isLoading = ref(true);
         
-        f7.store.dispatch('auth');
+        
 
 
          
