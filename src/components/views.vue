@@ -44,7 +44,7 @@ export default{
 
 
         const user = useStore('userGetter');  
-        console.log(store.state.userState[0])
+        console.log(store.state.userState)
         console.log(store.state.userState.token)
         console.log(store.state.userState[0].token)
         if (user.value.token) {
