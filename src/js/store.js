@@ -1,35 +1,46 @@
 
 import { createStore } from 'framework7/lite';
 
+const url = 'http://localhost:3001/';
+const  tg = window.Telegram.WebApp;
+
 const store = createStore({
   state: {
-    products: [
-      {
-        id: '1',
-        title: 'Apple iPhone 8',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi tempora similique reiciendis, error nesciunt vero, blanditiis pariatur dolor, minima sed sapiente rerum, dolorem corrupti hic modi praesentium unde saepe perspiciatis.'
-      },
-      {
-        id: '2',
-        title: 'Apple iPhone 8 Plus',
-        description: 'Velit odit autem modi saepe ratione totam minus, aperiam, labore quia provident temporibus quasi est ut aliquid blanditiis beatae suscipit odio vel! Nostrum porro sunt sint eveniet maiores, dolorem itaque!'
-      },
-      {
-        id: '3',
-        title: 'Apple iPhone X',
-        description: 'Expedita sequi perferendis quod illum pariatur aliquam, alias laboriosam! Vero blanditiis placeat, mollitia necessitatibus reprehenderit. Labore dolores amet quos, accusamus earum asperiores officiis assumenda optio architecto quia neque, quae eum.'
-      },
-    ]
+    categories: [],
+    user: []
   },
   getters: {
     products({ state }) {
       return state.products;
     }
   },
+
   actions: {
-    addProduct({ state }, product) {
-      state.products = [...state.products, product];
+    auth({ state }) {
+      fetch(url + 'public/user/auth', {
+        method: "post",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        //make sure to serialize your JSON body
+        body: JSON.stringify({
+          telegram_init_data: tg.initData
+        })
+      })
+      .then( (response) => {
+         console.log(response)
+         state.user = response
+      });
     },
+    getCategories({ state }) {
+            fetch('some-url')
+          .then((res) => res.json())
+          .then((users) => {
+            // assign new users to store state.users
+            state.users = users;
+    })
+  },
   },
 })
 export default store;

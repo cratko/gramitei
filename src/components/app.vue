@@ -26,21 +26,7 @@
   
   
       <!-- Popup -->
-      <f7-popup id="my-popup">
-        <f7-view>
-          <f7-page>
-            <f7-navbar title="Popup">
-              <f7-nav-right>
-                <f7-link popup-close>Close</f7-link>
-              </f7-nav-right>
-            </f7-navbar>
-            <f7-block>
-              <p>Popup content goes here.</p>
-            </f7-block>
-          </f7-page>
-        </f7-view>
 
-      </f7-popup>
 
     </f7-app>
 </template>
@@ -52,10 +38,16 @@
   import routes from '../js/routes.js';
   import store from '../js/store';
 
+
+import Categories from './categories.vue';
+
   export default {
     props: {
       f7route: Object,
       f7router: Object,
+    },
+    components: {
+      Categories
     },
     setup() {
 
@@ -91,7 +83,7 @@
 
                   
       function auth() {
-            fetch('https://reqres.in/api/users/200')
+            fetch('https://reqres.in/api/users/2')
           .then(response => {
             if (!response.ok) {
               if (!notificationFull) {
@@ -112,12 +104,15 @@
           })
           .then(commits => {
             console.log(commits);
+            isLoading.value = false
           });
       }
 
 
 
       auth();
+
+      store.dispatch('auth');
 
   
 

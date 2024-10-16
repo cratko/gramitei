@@ -8,6 +8,20 @@
       </f7-nav-right>
     </f7-navbar>
 
+    <f7-popup id="categories-filter">
+      <f7-view>
+        <f7-page>
+          <f7-navbar title="Фильтр">
+            <f7-nav-right>
+              <f7-link popup-close>Close</f7-link>
+            </f7-nav-right>
+          </f7-navbar>
+          <Categories></Categories>
+        </f7-page>
+      </f7-view>
+
+    </f7-popup>
+
     <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init">
       <div class="searchbar-inner">
         <div class="searchbar-input-wrap">
@@ -16,7 +30,7 @@
           <span class="input-clear-button"></span>
         </div>
         <span class="searchbar-disable-button">Cancel</span>
-        <f7-button round popup-open="#my-popup"><f7-icon material="tune"></f7-icon></f7-button>
+        <f7-button round popup-open="#categories-filter"><f7-icon material="tune"></f7-icon></f7-button>
       </div>
     </form>
 
@@ -79,3 +93,7 @@
     </f7-list>
   </f7-page>
 </template>
+
+<script setup>
+  import Categories from '../components/categories.vue';
+</script>
