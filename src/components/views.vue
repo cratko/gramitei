@@ -1,6 +1,6 @@
 <template>
     {{ user }}
-    <f7-view id="view-preloader" name="preloader" tab url="/preloader/"></f7-view>
+    <f7-view id="view-preloader" name="preloader" tab url="/preloader/" v-if="isLoading"></f7-view>
 
     <!-- Views/Tabs container -->
     <f7-views tabs class="safe-areas" v-show="!isLoading">
@@ -36,6 +36,8 @@ import {
 } from 'framework7-vue';
 export default {
     setup() {
+        const isLoading = ref(true);
+
         const user = useStore('userGetter');     
         let errorNotify;
 
@@ -56,7 +58,9 @@ export default {
                         setInterval(() => auth(), 5000);
                         return;
                     } else {
+                        isLoading.value = false;
                         return;
+                        
                     }
                 }
                 auth();

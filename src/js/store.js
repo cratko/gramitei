@@ -29,9 +29,8 @@ const store = createStore({
 
       })
       .then(commits => {
-        state.user.token = commits.token
-        state.user.data = tg.initDataUnsafe.user;
-        console.log(state.user)
+        state.userState.token = commits.token
+        state.userState.data = tg.initDataUnsafe.user;
       });
     },
     getCategories({ state }) {
@@ -39,7 +38,7 @@ const store = createStore({
           .then((res) => res.json())
           .then((users) => {
             // assign new users to store state.users
-            state.users = users;
+            state.userState = users;
     })
   },
 },
