@@ -59,11 +59,12 @@ export default{
                                     title: 'Проблемы с подключением',
                                     titleRightText: 'сейчас',
                                     subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                                    text: 'Выполняется попытка повторного подключения...',
                                     closeTimeout: 3000,
                                     });
                                 }
                                 errorNotify.open()
-                                setInterval(() => auth(), 5000);
+                                setTimeout(auth(), 5000)
                             })
                 }
                 auth();
