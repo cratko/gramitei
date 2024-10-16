@@ -41,8 +41,8 @@ export default {
 
         const user = useStore('userGetter');     
         let errorNotify;
-        if (!user.value.token) {
-            console.log(!user.value.token)
+        if (typeof user.value.token !== undefined) {
+            console.log(user.value.token)
             isLoading.value = false;
         } else {
                 f7ready((f7) => {
