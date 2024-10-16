@@ -48,7 +48,7 @@ export default{
             console.log(user.value)
             console.log(user.value)
             console.log(user.value)
-            console.log(user.value)
+            console.log(user.value.token)
             if (user.value.token) {
                 isLoading.value = false;
             } 
