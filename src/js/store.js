@@ -33,6 +33,7 @@ const store = createStore({
         state.userState.data = tg.initDataUnsafe.user;
         dispatch('getCategories');
       });
+      return true
     },
     getCategories({ state }) {
             fetch(url + 'private/offers/getCategories', {
