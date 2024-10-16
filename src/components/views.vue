@@ -43,7 +43,8 @@ export default{
 
 
         const user = useStore('userGetter');  
-
+        console.log('mounted')
+        console.log(user.value)
         if (user.value.token) {
             isLoading.value = false;
         }
