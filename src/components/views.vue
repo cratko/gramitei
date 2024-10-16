@@ -44,6 +44,11 @@ export default{
         f7ready((f7) => { 
             const user = useStore('userGetter'); 
             f7.store.dispatch('auth');
+            console.log(user.value)
+            console.log(user.value)
+            console.log(user.value)
+            console.log(user.value)
+            console.log(user.value)
             if (user.value.token) {
                 isLoading.value = false;
             } 
