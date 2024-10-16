@@ -28,11 +28,11 @@ const store = createStore({
           telegram_init_data: tg.initData
         })
       })
-      .then( (response) => {
+      .then( response => {
         response.json()
 
       })
-      .then((commits) => {
+      .then(commits => {
         console.log(commits.token)
         state.user = commits
       });
