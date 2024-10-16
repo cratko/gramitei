@@ -7,7 +7,7 @@ const  tg = window.Telegram.WebApp;
 const store = createStore({
   state: {
     categories: [],
-    user: []
+    user: {}
   },
   getters: {
     products({ state }) {
@@ -33,6 +33,7 @@ const store = createStore({
       })
       .then(commits => {
         state.user.token = commits.token
+        state.user.data = tg.initDataUnsafe.user;
         console.log(state.user)
       });
     },
