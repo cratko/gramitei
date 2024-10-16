@@ -42,10 +42,8 @@ export default {
         const user = useStore('userGetter');     
         let errorNotify;
         f7.store.dispatch('auth')
-
+        console.log(user.value.token)
         if (user.value.token) {
-            console.log(user.value.token)
-            console.log(typeof user.value.token !== undefined)
             isLoading.value = false;
         } else {
                 f7ready((f7) => {
