@@ -94,6 +94,7 @@ import Categories from './categories.vue';
           if (!store.getters.user) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
+            console.log(store.getters.user)
             return;
           }
         }
