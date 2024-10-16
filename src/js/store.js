@@ -29,8 +29,12 @@ const store = createStore({
         })
       })
       .then( (response) => {
-         console.log(response)
-         state.user = response
+        response.json()
+
+      })
+      .then((commits) => {
+        console.log(commits)
+        state.user = commits
       });
     },
     getCategories({ state }) {
