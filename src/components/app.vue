@@ -80,21 +80,14 @@ import Categories from './categories.vue';
       const isLoading = ref(true);
       let notificationFull;
       store.dispatch('auth')
+
             if (!store.user) {
               if (!notificationFull) {
-              notificationFull = f7.notification.create({
-                  title: 'Проблемы с подключением',
-                  titleRightText: 'сейчас',
-                  subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                  closeTimeout: 3000,
-                });
-              }
+                notificationFull = this.getErrorNotify();
                 notificationFull.open();
-                setTimeout(() => {
-                  auth();
-                }, 5000);
                 return;
-              } else {
+              }
+             } else {
                 isLoading.value = false
               }
 
@@ -109,5 +102,16 @@ import Categories from './categories.vue';
         isLoading
       }
     },
+    methods: {
+      getErrorNotify() {
+              let notify = f7.notification.create({
+                        title: 'Проблемы с подключением',
+                        titleRightText: 'сейчас',
+                        subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                        closeTimeout: 3000,
+                      });
+              return notify;
+                    }
+      }
   }
 </script>
