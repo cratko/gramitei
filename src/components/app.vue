@@ -79,7 +79,7 @@ import Categories from './categories.vue';
       const password = ref('');
       const isLoading = ref(true);
 
-      const user = store.getters.user;
+      const user = useStore('user');
 
       store.dispatch('auth')
       
