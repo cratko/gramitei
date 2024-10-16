@@ -65,7 +65,7 @@ export default{
 
         
 
-        return {isLoading}
+        return {isLoading, user}
     }
 
 };
