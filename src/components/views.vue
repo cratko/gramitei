@@ -43,6 +43,7 @@ export default {
         let errorNotify;
         if (typeof user.value.token !== undefined) {
             console.log(user.value.token)
+            console.log(typeof user.value.token !== undefined)
             isLoading.value = false;
         } else {
                 f7ready((f7) => {
