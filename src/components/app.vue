@@ -37,7 +37,7 @@
 
   import routes from '../js/routes.js';
   import store from '../js/store';
-
+  import { useStore } from 'framework7-vue';
 
 import Categories from './categories.vue';
 
