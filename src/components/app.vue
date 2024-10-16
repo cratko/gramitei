@@ -78,6 +78,9 @@ import Categories from './categories.vue';
       const username = ref('');
       const password = ref('');
       const isLoading = ref(true);
+
+      store.dispatch('auth')
+      console.log(store.getters.user)
       
       f7ready((f7) => {          
         let errorNotify;
