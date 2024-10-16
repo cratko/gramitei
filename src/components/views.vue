@@ -40,10 +40,10 @@ export default{
     setup() {
         const isLoading = ref(true);
         console.log(store.state.userState)
-        f7.store.dispatch('auth')
+        await f7.store.dispatch('auth')
 
 
-        const user = useStore('userGetter');  
+        const user = await useStore('userGetter');  
         console.log(store.state.userState)
         console.log(store.state.userState.token)
         console.log(user.value.token)
