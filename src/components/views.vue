@@ -41,7 +41,7 @@ export default {
 
         const user = useStore('userGetter');     
         let errorNotify;
-
+        f7ready((f7) => {
         function auth() {
             f7.store.dispatch('auth')
             if (!user.value.token) {
@@ -63,6 +63,7 @@ export default {
             }
         }
         auth();
+    });
 
         return {isLoading}
     }
