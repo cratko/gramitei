@@ -6,7 +6,7 @@ const  tg = window.Telegram.WebApp;
 
 const store = createStore({
   state: {
-    categories: [],
+    categoriesState: [],
     userState: []
   },
   actions: {
@@ -31,14 +31,21 @@ const store = createStore({
       .then(commits => {
         state.userState.token = commits.token
         state.userState.data = tg.initDataUnsafe.user;
+        dispatch('getCategories');
       });
     },
     getCategories({ state }) {
-            fetch('some-url')
+            fetch(url + 'private/offers/getCategories', {
+              method: "get",
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + state.userState.token
+              }})
           .then((res) => res.json())
-          .then((users) => {
+          .then((categories) => {
             // assign new users to store state.users
-            state.userState = users;
+            state.categoriesState = categories;
     })
   },
 },
