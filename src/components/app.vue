@@ -78,18 +78,29 @@ import Categories from './categories.vue';
       const username = ref('');
       const password = ref('');
       const isLoading = ref(true);
-      let notificationFull;
-      store.dispatch('auth')
 
-            if (!store.user) {
-              if (!notificationFull) {
-                notificationFull = this.getErrorNotify();
-                notificationFull.open();
-                return;
-              }
-             } else {
-                isLoading.value = false
-              }
+      f7ready((f7) => {
+        function auth() {
+          let errorNotify;
+          store.dispatch('auth')
+
+          errorNotify = f7.notification.create({
+                          title: 'Проблемы с подключением',
+                          titleRightText: 'сейчас',
+                          subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                          closeTimeout: 3000,
+                        });
+          if (!store.user) {
+            errorNotify.open()
+            setInterval(() => auth(), 5000);
+            return;
+          }
+        }
+        auth();
+      });
+
+
+
 
       
 
@@ -102,16 +113,5 @@ import Categories from './categories.vue';
         isLoading
       }
     },
-    methods: {
-      getErrorNotify() {
-              let notify = f7.notification.create({
-                        title: 'Проблемы с подключением',
-                        titleRightText: 'сейчас',
-                        subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                        closeTimeout: 3000,
-                      });
-              return notify;
-                    }
-      }
   }
 </script>
