@@ -40,7 +40,7 @@ const store = createStore({
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Headers': 'Authorization',
                 'Authorization': 'Bearer ' + state.userState.token
               }})
           .then((res) => res.json())
