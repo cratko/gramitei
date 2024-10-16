@@ -40,13 +40,10 @@ export default{
     setup() {
         const user = useStore('userGetter'); 
 
-        onMounted(() => {
-            // load users when component mounted
-            store.dispatch('auth');
-        });
+        f7.store.s
         const isLoading = ref(true);
         
-        console.log(store.state.userState)
+        f7.store.dispatch('auth');
 
 
          
