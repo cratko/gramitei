@@ -100,10 +100,10 @@ import Categories from './categories.vue';
                 }, 5000);
                 return;
               }
-            response.json()
+            return response.json()
           })
-          .then(commits => {
-            console.log(commits);
+          .then(data => {
+            console.log(data);
             isLoading.value = false
           });
       }

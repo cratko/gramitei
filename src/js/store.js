@@ -29,11 +29,10 @@ const store = createStore({
         })
       })
       .then( response => {
-        response.json()
+        return response.json()
 
       })
       .then(commits => {
-        console.log("QUERY 1")
         console.log(commits)
         state.user = commits
       });
