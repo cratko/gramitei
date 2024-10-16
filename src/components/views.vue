@@ -53,10 +53,7 @@ export default {
                                     closeTimeout: 3000,
                                     });
                                 }
-                    console.log(user)
-                    console.log(user.value)
-                    console.log(!user.value.length)
-                    if (!user.value.length) {
+                    if (!user.value.token) {
                         errorNotify.open()
                         setInterval(() => auth(), 5000);
                         return;
