@@ -91,7 +91,7 @@ import Categories from './categories.vue';
                           closeTimeout: 3000,
                         });
                       }
-          if (!store.user) {
+          if (!store.getters.user) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
             return;

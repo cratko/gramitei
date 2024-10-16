@@ -48,6 +48,11 @@ const store = createStore({
             state.users = users;
     })
   },
+  getters: {
+    user({ state }) {
+      return state.user;
+    }
+  }
   },
 })
 export default store;
