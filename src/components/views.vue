@@ -40,7 +40,7 @@ export default{
     setup() {
         const isLoading = ref(true);
 
-        await f7.store.dispatch('auth')
+        f7.store.dispatch('auth')
 
 
         const user = useStore('userGetter');  
