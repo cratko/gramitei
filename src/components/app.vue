@@ -98,11 +98,6 @@ import Categories from './categories.vue';
                 isLoading.value = false
               }
 
-
-
-
-      auth();
-
       
 
   
