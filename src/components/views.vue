@@ -43,12 +43,8 @@ export default{
         let errorNotify;
 
         f7ready((f7) => { 
-    f7.store.dispatch('auth').then(() => {
-        console.log(user.value);
-        if (user.value) {
-            isLoading.value = false;
-        }
-    });
+     const rr = f7.store.dispatch('auth')
+     console.log(rr)
 });
 
         return {isLoading}

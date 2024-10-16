@@ -32,6 +32,7 @@ const store = createStore({
         state.userState.token = commits.token
         state.userState.data = tg.initDataUnsafe.user;
         dispatch('getCategories');
+        return state.userState;
       });
       
     },
@@ -48,13 +49,12 @@ const store = createStore({
           .then((categories) => {
             // assign new users to store state.users
             state.categoriesState = categories;
-            console.log(state.categoriesState)
     })
   },
 },
   getters: {
     userGetter({ state }) {
-      return state.userState.token;
+      return state.userState;
     }
   }
 })
