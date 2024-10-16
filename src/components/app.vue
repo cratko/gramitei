@@ -79,8 +79,8 @@ import Categories from './categories.vue';
       const password = ref('');
       const isLoading = ref(true);
       let notificationFull;
-
-            if (!store.dispatch('auth')) {
+      store.dispatch('auth')
+            if (!store.user) {
               if (!notificationFull) {
               notificationFull = f7.notification.create({
                   title: 'Проблемы с подключением',
