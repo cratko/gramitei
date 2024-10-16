@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import store from '../js/store.js';
 import {
   f7,
   useStore,
@@ -43,10 +44,7 @@ export default{
 
 
         const user = useStore('userGetter');  
-        console.log('mounted')
-        console.log(user)
-        console.log(user.value[0])
-        console.log(user.value['token'])
+        console.log(store.state.userState)
         if (user.value.token) {
             isLoading.value = false;
         } 
