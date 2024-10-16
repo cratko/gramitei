@@ -38,12 +38,19 @@ import {
 import { ref, onMounted } from 'vue';
 export default{
     setup() {
+        const user = useStore('userGetter'); 
+
+      onMounted(() => {
+        // load users when component mounted
+        store.dispatch('auth');
+      });
         const isLoading = ref(true);
+        
         console.log(store.state.userState)
-        await f7.store.dispatch('auth')
+        f7.store.dispatch('auth')
 
 
-        const user = await useStore('userGetter');  
+         
         console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         console.log(store.state.userState)
         console.log(store.state.userState.token)
