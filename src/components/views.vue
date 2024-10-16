@@ -39,7 +39,7 @@ import { ref, onMounted } from 'vue';
 export default{
     setup() {
         const isLoading = ref(true);
-
+        console.log(store.state.userState)
         f7.store.dispatch('auth')
 
 
