@@ -79,17 +79,18 @@ import Categories from './categories.vue';
       const password = ref('');
       const isLoading = ref(true);
 
-      f7ready((f7) => {
+      f7ready((f7) => {          
+        let errorNotify;
         function auth() {
-          let errorNotify;
           store.dispatch('auth')
-
+          if (!errorNotify) {
           errorNotify = f7.notification.create({
                           title: 'Проблемы с подключением',
                           titleRightText: 'сейчас',
                           subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
                           closeTimeout: 3000,
                         });
+                      }
           if (!store.user) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
