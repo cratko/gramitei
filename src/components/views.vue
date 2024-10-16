@@ -41,7 +41,8 @@ export default {
 
         const user = useStore('userGetter');     
         let errorNotify;
-
+        f7.store.dispatch('auth')
+        
         f7ready((f7) => {
                 function auth() {
                     f7.store.dispatch('auth')
