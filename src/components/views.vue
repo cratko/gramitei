@@ -41,29 +41,33 @@ export default {
 
         const user = useStore('userGetter');     
         let errorNotify;
-        f7ready((f7) => {
-        function auth() {
-            f7.store.dispatch('auth')
-            if (!user.value.token) {
-                if (!errorNotify) {
-                             errorNotify = f7.notification.create({
-                            title: 'Проблемы с подключением',
-                            titleRightText: 'сейчас',
-                            subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                            closeTimeout: 3000,
-                            });
-                        }
-                        errorNotify.open()
-                        setInterval(() => auth(), 5000);
-                return;
-            } else {
-                isLoading.value = false;
-                return;
-                
-            }
+        if (!user.value.token) {
+            isLoading.value = false;
+        } else {
+                f7ready((f7) => {
+                function auth() {
+                    f7.store.dispatch('auth')
+                    if (!user.value.token) {
+                        if (!errorNotify) {
+                                    errorNotify = f7.notification.create({
+                                    title: 'Проблемы с подключением',
+                                    titleRightText: 'сейчас',
+                                    subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                                    closeTimeout: 3000,
+                                    });
+                                }
+                                errorNotify.open()
+                                setInterval(() => auth(), 5000);
+                        return;
+                    } else {
+                        isLoading.value = false;
+                        return;
+                        
+                    }
+                }
+                auth();
+            });
         }
-        auth();
-    });
 
         return {isLoading}
     }
