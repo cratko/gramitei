@@ -74,6 +74,7 @@ export default{
                         return;
                     } else {
                         isLoading.value = false;
+                        console.log(user.value.token)
                         return;
                         
                     }
