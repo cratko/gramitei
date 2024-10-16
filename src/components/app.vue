@@ -79,8 +79,9 @@ import Categories from './categories.vue';
       const password = ref('');
       const isLoading = ref(true);
 
+      const user = store.getters.user;
+
       store.dispatch('auth')
-      console.log(store.getters.user)
       
       f7ready((f7) => {          
         let errorNotify;
@@ -94,11 +95,11 @@ import Categories from './categories.vue';
                           closeTimeout: 3000,
                         });
                       }
-                      const user = store.user
+                      
           if (user === undefined) {
             errorNotify.open()
             setInterval(() => auth(), 5000);
-            console.log(store.user)
+            console.log(user)
             return;
           } else {
             return;
