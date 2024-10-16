@@ -43,16 +43,13 @@ export default{
         let errorNotify;
 
         f7ready((f7) => { 
-            f7.store.dispatch('auth');
-            console.log(user.value)
-            console.log(user.value)
-            console.log(user.value)
-            console.log(user.value)
-            console.log(user.value.token)
-            if (user.value.token) {
-                isLoading.value = false;
-            } 
-        });
+    f7.store.dispatch('auth').then(() => {
+        console.log(user.value.token);
+        if (user.value.token) {
+            isLoading.value = false;
+        }
+    });
+});
 
         return {isLoading}
     }
