@@ -46,6 +46,7 @@ const store = createStore({
           .then((categories) => {
             // assign new users to store state.users
             state.categoriesState = categories;
+            console.log(state.categoriesState)
     })
   },
 },
