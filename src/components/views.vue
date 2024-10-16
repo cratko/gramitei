@@ -42,10 +42,13 @@ export default{
         const user = useStore('userGetter'); 
         let errorNotify;
 
-        f7ready((f7) => { 
-     const rr = f7.store.dispatch('auth')
-     console.log(rr)
-});
+        ff7.store.dispatch('auth')
+            .then(() => {
+                console.log(user.value.token);
+            })
+            .catch(error => {
+                console.error('Error during authentication or fetching categories:', error);
+            });
 
         return {isLoading}
     }
