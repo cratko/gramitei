@@ -46,7 +46,7 @@ export default{
         console.log('mounted')
         console.log(user.value)
         console.log(user.value[0])
-        console.log(user.value[0].token)
+        console.log(user.value['token'])
         if (user.value.token) {
             isLoading.value = false;
         } 
