@@ -10,7 +10,7 @@ const store = createStore({
     userState: []
   },
   actions: {
-    auth({ state }) {
+    auth({ state, dispatch }) {
       fetch(url + 'public/user/auth', {
         method: "post",
         headers: {
