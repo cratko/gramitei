@@ -83,7 +83,7 @@ import Categories from './categories.vue';
         const user = useStore('user');     
         let errorNotify;
         function auth() {
-          store.dispatch('auth')
+          f7.store.dispatch('auth')
           if (!errorNotify) {
           errorNotify = f7.notification.create({
                           title: 'Проблемы с подключением',
