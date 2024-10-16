@@ -36,12 +36,14 @@ import {
 } from 'framework7-vue';
 import { ref, onMounted } from 'vue';
 export default{
-    mounted() {
-        const user = useStore('userGetter');     
-        
-        const firstLoad = () => {
-            f7.store.dispatch('auth')
-        }
+    mounted() {   
+
+
+        f7.store.dispatch('auth')
+
+
+        const user = useStore('userGetter');  
+
         if (user.value.token) {
             isLoading.value = false;
         }
