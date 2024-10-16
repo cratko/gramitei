@@ -38,34 +38,18 @@ import {
 import { ref, onMounted } from 'vue';
 export default{
     setup() {
-        
+        const isLoading = ref(true);
+        let errorNotify;
 
         f7ready((f7) => { 
             const user = useStore('userGetter'); 
             f7.store.dispatch('auth');
+            if (user.value.token) {
+                isLoading.value = false;
+            } 
         });
-        const isLoading = ref(true);
-        
-        
 
-
-         
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        console.log(store.state.userState)
-        console.log(store.state.userState.token)
-        console.log(user.value.token)
-        console.log(user.value)
-        if (user.value.token) {
-            isLoading.value = false;
-        } 
-
-        let errorNotify;
-
-        console.log(user.value.token)
-
-        
-
-        return {isLoading, user}
+        return {isLoading}
     }
 
 };
