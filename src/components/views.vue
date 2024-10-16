@@ -37,6 +37,8 @@ import {
 import { ref, onMounted } from 'vue';
 export default{
     mounted() {
+        const user = useStore('userGetter');     
+        
         const firstLoad = () => {
             f7.store.dispatch('auth')
         }
