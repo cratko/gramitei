@@ -64,10 +64,10 @@ export default{
                                     });
                                 }
                                 errorNotify.open()
-                                setTimeout(auth(), 5000)
+                                setTimeout(auth, 5000)
                             })
                 }
-                auth();
+                auth()
             });
             });
 
