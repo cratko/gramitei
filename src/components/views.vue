@@ -41,35 +41,49 @@ export default{
 
         let errorNotify;
 
-        f7.store.dispatch('auth')
-            .then(() => {
-                isLoading.value = false;
-            })
-            .catch(error => {
-                 f7ready((f7) => {
-                function auth() {
-                    f7.store.dispatch('auth')
-                    .then(() => {
-                        isLoading.value = false;
-                        return;
-                    })
-                    .catch(error => {
-                        if (!errorNotify) {
-                                    errorNotify = f7.notification.create({
-                                    title: 'Проблемы с подключением',
-                                    titleRightText: 'сейчас',
-                                    subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
-                                    text: 'Попытка повторного подключения...',
-                                    closeTimeout: 3000,
-                                    });
-                                }
-                                errorNotify.open()
-                                setTimeout(auth, 5000)
-                            })
-                }
-                auth()
+        if(!window.Telegram.WebApp.initData) {
+            f7ready((f7) => {
+                
+                errorNotify = f7.notification.create({
+                title: 'Ошибка аутентификации',
+                titleRightText: 'сейчас',
+                subtitle: 'Пожалуйста, войдите через телеграмм',
+                text: 'Вход через браузер пока недоступен.'
+                });
+                
+                errorNotify.open()
             });
-            });
+        } else {
+            f7.store.dispatch('auth')
+                .then(() => {
+                    isLoading.value = false;
+                })
+                .catch(error => {
+                    f7ready((f7) => {
+                    function auth() {
+                        f7.store.dispatch('auth')
+                        .then(() => {
+                            isLoading.value = false;
+                            return;
+                        })
+                        .catch(error => {
+                            if (!errorNotify) {
+                                        errorNotify = f7.notification.create({
+                                        title: 'Проблемы с подключением',
+                                        titleRightText: 'сейчас',
+                                        subtitle: 'Возможные технические работы или неполадки на стороне сервиса',
+                                        text: 'Попытка повторного подключения...',
+                                        closeTimeout: 3000,
+                                        });
+                                    }
+                                    errorNotify.open()
+                                    setTimeout(auth, 5000)
+                                })
+                    }
+                    auth()
+                });
+                });
+            }
 
         return {isLoading}
     }
