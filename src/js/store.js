@@ -90,6 +90,7 @@ const store = createStore({
         })
         .catch(error => {
           // This catch will handle any errors from auth, getCategories, or getOffers
+          console.log(error)
           throw new Error('Failed to load data: ' + error.message);
         });
     }
