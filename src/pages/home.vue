@@ -71,6 +71,7 @@
           <f7-icon material="star" size="13px"></f7-icon>
         </f7-badge>
         <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
+        <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
       </f7-list-item-subtitle>
     </f7-list-item>
 
