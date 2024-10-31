@@ -112,9 +112,8 @@ console.log(offers.value)
 function getCategories(categoryIds) {
   // Map through the categoryIds to find matching categories
   const categoriesInfo = categoryIds.map(catId => {
-    const category = categories.value.find(cat => cat.Id === catId.Id); // Find the category by Id
-    // Return title and color if the category exists and is not ID 1 or ID 2
-    return category ? { title: category.Title, color: category.Color } : null; 
+    const category = categories.value.find(cat => cat.Id === catId); // Find the category by Id
+    return category ? { title: category.Title, color: category.Color } : null; // Return title and color or null
   });
 
   // Filter out any null values (in case some IDs do not match any category)
