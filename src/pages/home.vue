@@ -55,27 +55,34 @@
     </f7-block>
   -->
   <f7-block-title>Предложения</f7-block-title>
-    <f7-list strong inset dividersIos>
-      <f7-list-item
+  <f7-list strong inset dividersIos>
+    <f7-list-item
       v-for="offer in offers"
       :key="offer.Uuid"
       :title="offer.Title"
-      :after="offer.OfferRating"
       :text="offer.Description"
       media-list
-      :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`" 
+      :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`" <!-- Adjust link as needed -->
     >
       <f7-list-item-subtitle>
+        <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
+        <template v-if="getCategoryTitle(offer.CategoryIds)">
+          <f7-badge
+            v-for="(title, index) in getCategoryTitle(offer.CategoryIds).split(', ')" 
+            :key="index"
+          >
+            {{ title }} <!-- Display each category title -->
+          </f7-badge>
+        </template>
+      </f7-list-item-subtitle>
+      <template #after>
         <f7-badge :color="getBadgeColor(offer.OfferRating)">
           {{ offer.OfferRating }}
           <f7-icon material="star" size="13px"></f7-icon>
-        </f7-badge>
-        <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
-        <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
-      </f7-list-item-subtitle>
+        </f7-badge> <!-- Move badge here -->
+      </template>
     </f7-list-item>
-
-    </f7-list>
+  </f7-list>
     {{ offers }}
     {{ categories }}
   </f7-page>
@@ -101,16 +108,19 @@ function getBadgeColor(rating) {
 }
 
 function getCategoryTitle(categoryIds) {
-  // Find the first category that does not have a ParentId and is not ID 1 or 2
-  const category = categories.value.find(cat => 
+  // Filter categories to exclude those with IDs 1 and 2
+  const filteredCategories = categories.value.filter(cat => 
     categoryIds.includes(cat.Id) && 
     cat.ParentId === null && 
     cat.Id !== 1 && 
     cat.Id !== 2
   );
 
-  // Return the title if found, otherwise return 'Неизвестная категория'
-  return category ? category.Title : 'Неизвестная категория';
+  // Extract titles from the filtered categories
+  const titles = filteredCategories.map(cat => cat.Title);
+
+  // Return the titles joined by a comma or a message if none found
+  return titles.length > 0 ? titles.join(', ') : 'Нет доступных категорий';
 }
 
 function getOfferType(categoryIds) {
