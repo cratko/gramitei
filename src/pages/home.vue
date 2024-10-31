@@ -62,7 +62,7 @@
       :title="offer.Title"
       :text="offer.Description"
       media-list
-      :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`" <!-- Adjust link as needed -->
+      :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`"
     >
       <f7-list-item-subtitle>
         <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
