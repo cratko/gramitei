@@ -57,38 +57,22 @@
   <f7-block-title>Предложения</f7-block-title>
     <f7-list strong inset dividersIos>
       <f7-list-item
-        title="Требуется партнер"
-        after="1200 RUB"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus."
-        media-list
-        link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-      >
-
-      <f7-list-item-subtitle><f7-badge color="green">4.2<f7-icon material="star" size="13px"></f7-icon></f7-badge><f7-badge>Покупка</f7-badge></f7-list-item-subtitle>
-    
+      v-for="offer in offers"
+      :key="offer.Uuid"
+      :title="offer.Title"
+      :after="offer.OfferRating"
+      :text="offer.Description"
+      media-list
+      :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`" 
+    >
+      <f7-list-item-subtitle>
+        <f7-badge :color="getBadgeColor(offer.OfferRating)">
+          {{ offer.OfferRating }}
+          <f7-icon material="star" size="13px"></f7-icon>
+        </f7-badge>
+        <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
+      </f7-list-item-subtitle>
     </f7-list-item>
-    <f7-list-item
-    title="Требуется партнер"
-    after="1200 RUB"
-    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus."
-    media-list
-    link="/dynamic-route/blog/45/post/125/?foo=bar#about"
-  >
-
-  <f7-list-item-subtitle><f7-badge color="green">4.2<f7-icon material="star" size="13px"></f7-icon></f7-badge><f7-badge>Покупка</f7-badge></f7-list-item-subtitle>
-
-  </f7-list-item>
-  <f7-list-item
-  title="Требуется партнер"
-  after="1200 RUB"
-  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis tellus ut turpis condimentum, ut dignissim lacus tincidunt. Cras dolor metus, ultrices condimentum sodales sit amet, pharetra sodales eros. Phasellus vel felis tellus. Mauris rutrum ligula nec dapibus feugiat. In vel dui laoreet, commodo augue id, pulvinar lacus."
-  media-list
-  link="/dynamic-route/blog/45/post/125/?foo=bar#about"
->
-
-  <f7-list-item-subtitle><f7-badge color="green">4.2<f7-icon material="star" size="13px"></f7-icon></f7-badge><f7-badge>Покупка</f7-badge></f7-list-item-subtitle>
-
-  </f7-list-item>
 
     </f7-list>
     {{ offers }}
@@ -107,4 +91,17 @@
 
 const offers = useStore('offersGetter')
 const categories = useStore('categoriesGetter')
+
+// Function to get badge color based on rating
+function getBadgeColor(rating) {
+  if (rating >= 4) return 'green';
+  if (rating >= 2) return 'orange';
+  return 'red';
+}
+
+// Function to get category title by ID
+function getCategoryTitle(categoryIds) {
+  const category = categories.value.find(cat => categoryIds.includes(cat.Id));
+  return category ? category.Title : 'Неизвестная категория';
+}
 </script>
