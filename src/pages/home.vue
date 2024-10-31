@@ -96,4 +96,11 @@
 
 <script setup>
   import Categories from '../components/categories.vue';
+  import {
+  f7,
+  useStore,
+  f7ready
+} from 'framework7-vue';
+
+const offers = useStore('')
 </script>

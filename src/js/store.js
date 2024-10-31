@@ -10,9 +10,10 @@ const store = createStore({
       token: null,
       data: null,
     },
+    offersState: []
   },
   actions: {
-    auth({ state, dispatch }) {
+    auth({ state }) {
       return fetch(url + 'public/user/auth', {
         method: "post",
         headers: {
@@ -33,7 +34,6 @@ const store = createStore({
         state.userState.token = commits.token;
         state.userState.data = tg.initDataUnsafe.user;
         // Dispatch getCategories only after successful authentication
-        return dispatch('getCategories');
       });
     },
     getCategories({ state }) {
@@ -56,10 +56,43 @@ const store = createStore({
         state.categoriesState = categories;
       });
     },
+    getOffers({ state }, {params}) {
+      return fetch(url + `private/offers/getOffers?${params.toString()}`, {
+        method: "get",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + state.userState.token,
+        },
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to fetch offers');
+        }
+        return res.json();
+      })
+      .then(offers => {
+        // assign new users to store state.categoriesState
+        state.offersState = offers;
+        console.log(offers)
+      });
+    },
+    firstLoad({state, dispatch}) {
+      dispatch('auth')
+      dispatch('getCategories')
+
+      const getOffersParams = new URLSearchParams({
+        sort_by: "rating",
+    });
+      dispatch('getOffers', getOffersParams)
+    }
   },
   getters: {
     userGetter({ state }) {
       return state.userState;
+    },
+    offersGetter({state}) {
+      return state.offersState;
     },
   },
 });
