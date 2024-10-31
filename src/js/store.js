@@ -77,27 +77,21 @@ const store = createStore({
         console.log(offers)
       });
     },
-    firstLoad({state, dispatch}) {
-      dispatch('auth')
-      .then(() => {
-        dispatch('getCategories')
+    firstLoad({ state, dispatch }) {
+      return dispatch('auth') // Start by authenticating
+        .then(() => {
+          return dispatch('getCategories'); // Fetch categories after successful auth
+        })
         .then(() => {
           const getOffersParams = new URLSearchParams({
             sort_by: "rating",
-          })
-          dispatch('getOffers', getOffersParams)
-          .then(() => {
-
-          }).catch(error => {
-            throw new Error('Failed to fetch offers');
-          })
-        }).catch(error => {
-          throw new Error('Failed to fetch categories');
+          });
+          return dispatch('getOffers', getOffersParams); // Fetch offers after fetching categories
         })
-      })
-      .catch(error => {
-        throw new Error('Failed to fetch auth');
-      })
+        .catch(error => {
+          // This catch will handle any errors from auth, getCategories, or getOffers
+          throw new Error('Failed to load data: ' + error.message);
+        });
     }
   },
   getters: {
