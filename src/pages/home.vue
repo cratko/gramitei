@@ -70,7 +70,7 @@
           {{ offer.OfferRating }}
           <f7-icon material="star" size="13px"></f7-icon>
         </f7-badge>
-        <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
+        <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
         <f7-badge>{{ getCategoryTitle(offer.CategoryIds) }}</f7-badge>
       </f7-list-item-subtitle>
     </f7-list-item>
@@ -96,13 +96,37 @@ const categories = useStore('categoriesGetter')
 // Function to get badge color based on rating
 function getBadgeColor(rating) {
   if (rating >= 4) return 'green';
-  if (rating >= 2) return 'orange';
+  if (rating > 2) return 'orange';
   return 'red';
 }
 
-// Function to get category title by ID
 function getCategoryTitle(categoryIds) {
-  const category = categories.value.find(cat => categoryIds.includes(cat.Id));
+  // Find the first category that does not have a ParentId and is not ID 1 or 2
+  const category = categories.value.find(cat => 
+    categoryIds.includes(cat.Id) && 
+    cat.ParentId === null && 
+    cat.Id !== 1 && 
+    cat.Id !== 2
+  );
+
+  // Return the title if found, otherwise return 'Неизвестная категория'
   return category ? category.Title : 'Неизвестная категория';
 }
+
+function getOfferType(categoryIds) {
+  // Check for category with ID 1
+  const category1 = categories.value.find(cat => cat.Id === 1);
+  if (categoryIds.includes(1) && category1) {
+    return category1.Title; // Return the title for ID 1
+  }
+
+  // Check for category with ID 2
+  const category2 = categories.value.find(cat => cat.Id === 2);
+  if (categoryIds.includes(2) && category2) {
+    return category2.Title; // Return the title for ID 2
+  }
+
+  return null; // Return null if neither category is found
+}
+
 </script>
