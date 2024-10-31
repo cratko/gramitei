@@ -102,6 +102,9 @@ const store = createStore({
     offersGetter({state}) {
       return state.offersState;
     },
+    categoriesGetter({state}) {
+      return state.categoriesState;
+    }
   },
 });
 

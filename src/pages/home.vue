@@ -92,6 +92,8 @@
 
     </f7-list>
   </f7-page>
+  {{ offers }}
+  {{ categories }}
 </template>
 
 <script setup>
@@ -102,4 +104,6 @@
   f7ready
 } from 'framework7-vue';
 
+const offers = useStore('offersGetter')
+const categories = useStore('')
 </script>
