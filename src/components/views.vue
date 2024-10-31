@@ -61,7 +61,7 @@ export default{
                 .catch(error => {
                     f7ready((f7) => {
                     function auth() {
-                        f7.store.dispatch('auth')
+                        f7.store.dispatch('firstLoad')
                         .then(() => {
                             isLoading.value = false;
                             return;
