@@ -66,12 +66,13 @@
     >
       <f7-list-item-subtitle>
         <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
-        <template v-if="getCategoryTitle(offer.CategoryIds)">
+        <template v-if="getCategory(offer.CategoryIds).length > 0">
           <f7-badge
-            v-for="(title, index) in getCategoryTitle(offer.CategoryIds).split(', ')" 
+            v-for="(item, index) in getCategory(offer.CategoryIds)" 
             :key="index"
+            :color="item.color" 
           >
-            {{ title }} <!-- Display each category title -->
+            {{ item.title }} <!-- Display each category title -->
           </f7-badge>
         </template>
       </f7-list-item-subtitle>
@@ -107,20 +108,20 @@ function getBadgeColor(rating) {
   return 'red';
 }
 
-function getCategoryTitle(categoryIds) {
-  // Filter categories to exclude those with IDs 1 and 2
+function getCategory(categoryIds) {
   const filteredCategories = categories.value.filter(cat => 
-    categoryIds.includes(cat.Id) && 
+    categoryIds.some(catId => catId.Id === cat.Id) && // Check if categoryId matches
     cat.ParentId === null && 
     cat.Id !== 1 && 
     cat.Id !== 2
   );
 
-  // Extract titles from the filtered categories
-  const titles = filteredCategories.map(cat => cat.Title);
+  const titlesWithColors = filteredCategories.map(cat => ({
+    title: cat.Title,
+    color: categoryIds.find(catId => catId.Id === cat.Id)?.color // Get color from categoryIds
+  }));
 
-  // Return the titles joined by a comma or a message if none found
-  return titles.length > 0 ? titles.join(', ') : 'Нет доступных категорий';
+  return titlesWithColors.length > 0 ? titlesWithColors : [{ title: 'Нет доступных категорий', color: null }];
 }
 
 function getOfferType(categoryIds) {
