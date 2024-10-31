@@ -105,5 +105,5 @@
 } from 'framework7-vue';
 
 const offers = useStore('offersGetter')
-const categories = useStore('')
+const categories = useStore('categoriesGetter')
 </script>
