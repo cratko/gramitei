@@ -66,9 +66,9 @@
     >
       <f7-list-item-subtitle>
         <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
-        <template>
+        <template v-if="getCategories(offer.CategoryIds).length > 0">
           <f7-badge
-            v-for="(item, index) in getCategory(offer.CategoryIds)" 
+            v-for="(item, index) in getCategories(offer.CategoryIds)" 
             :key="index"
             :color="item.color" 
           >
@@ -108,14 +108,15 @@ function getBadgeColor(rating) {
   return 'red';
 }
 
-function getCategory(categoryIds) {
-  // Find the first category that is not ID 1 or ID 2
-  const category = categories.value.find(cat => 
-    categoryIds.some(catId => catId.Id === cat.Id)
-  );
+function getCategories(categoryIds) {
+  // Map through the categoryIds to find matching categories
+  const categoriesInfo = categoryIds.map(catId => {
+    const category = categories.value.find(cat => cat.Id === catId.Id);
+    return category ? { title: category.Title, color: category.Color } : null; // Return title and color or null
+  });
 
-  // If a valid category is found, return its title and color
-  return category ? { title: category.Title, color: category.Color } : null; // Return null if not found
+  // Filter out any null values (in case some IDs do not match any category)
+  return categoriesInfo.filter(info => info !== null);
 }
 
 function getOfferType(categoryIds) {
