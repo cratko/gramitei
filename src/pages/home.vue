@@ -108,6 +108,9 @@ function getBadgeColor(rating) {
   return 'red';
 }
 
+console.log(categories.value)
+console.log(offers.value)
+
 function getCategories(categoryIds) {
   // Map through the categoryIds to find matching categories
   const categoriesInfo = categoryIds.map(catId => {
