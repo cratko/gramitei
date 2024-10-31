@@ -56,7 +56,7 @@ const store = createStore({
         state.categoriesState = categories;
       });
     },
-    getOffers({ state }, {params}) {
+    getOffers({ state }, params) {
       return fetch(url + `private/offers/getOffers?${params.toString()}`, {
         method: "get",
         headers: {
