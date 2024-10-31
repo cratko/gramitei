@@ -54,7 +54,7 @@ export default{
                 errorNotify.open()
             });
         } else {
-            f7.store.dispatch('auth')
+            f7.store.dispatch('firstLoad')
                 .then(() => {
                     isLoading.value = false;
                 })
