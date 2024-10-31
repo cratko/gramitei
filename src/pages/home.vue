@@ -65,7 +65,6 @@
       :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`"
     >
       <f7-list-item-subtitle>
-        <f7-badge :color="getOfferType(offer.CategoryIds)[1]" >{{ getOfferType(offer.CategoryIds)[0] }}</f7-badge>
         <f7-badge
             v-for="(item, index) in getCategories(offer.CategoryIds)" 
             :key="index"
@@ -118,22 +117,6 @@ function getCategories(categoryIds) {
 
   // Filter out any null values (in case some IDs do not match any category)
   return categoriesInfo.filter(info => info !== null);
-}
-
-function getOfferType(categoryIds) {
-  // Check for category with ID 1
-  const category1 = categories.value.find(cat => cat.Id === 1);
-  if (categoryIds.includes(1) && category1) {
-    return [category1.Title, category1.Color]; // Return the title for ID 1
-  }
-
-  // Check for category with ID 2
-  const category2 = categories.value.find(cat => cat.Id === 2);
-  if (categoryIds.includes(2) && category2) {
-    return [category2.Title, category2.Color]; // Return the title for ID 2
-  }
-
-  return null; // Return null if neither category is found
 }
 
 </script>
