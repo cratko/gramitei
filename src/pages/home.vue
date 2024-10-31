@@ -121,6 +121,7 @@ function getCategory(categoryIds) {
     title: cat.Title,
     color: categoryIds.find(catId => catId.Id === cat.Id)?.Color // Get color from categoryIds
   }));
+  console.log(titlesWithColors)
 
   // Return titles and colors or a message if none found
   return titlesWithColors.length > 0 ? titlesWithColors : [{ title: 'Нет доступных категорий', color: null }];
