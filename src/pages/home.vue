@@ -114,7 +114,7 @@ function getCategories(categoryIds) {
   const categoriesInfo = categoryIds.map(catId => {
     const category = categories.value.find(cat => cat.Id === catId.Id); // Find the category by Id
     // Return title and color if the category exists and is not ID 1 or ID 2
-    return category && ![1, 2].includes(category.Id) ? { title: category.Title, color: category.Color } : null; 
+    return category && category.Id != 1 && category.Id != 2 ? { title: category.Title, color: category.Color } : null; 
   });
 
   // Filter out any null values (in case some IDs do not match any category)
