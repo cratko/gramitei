@@ -109,22 +109,14 @@ function getBadgeColor(rating) {
 }
 
 function getCategory(categoryIds) {
-  // Filter categories to exclude those with IDs 1 and 2
-  const filteredCategories = categories.value.filter(cat => 
+  // Find the first category that is not ID 1 or ID 2
+  const category = categories.value.find(cat => 
     categoryIds.some(catId => catId.Id === cat.Id) && // Check if categoryId matches
-    cat.ParentId === null && 
     ![1, 2].includes(cat.Id) // Exclude categories with IDs 1 and 2
   );
 
-  // Map filtered categories to include title and color
-  const titlesWithColors = filteredCategories.map(cat => ({
-    title: cat.Title,
-    color: categoryIds.find(catId => catId.Id === cat.Id)?.Color // Get color from categoryIds
-  }));
-  console.log(titlesWithColors)
-
-  // Return titles and colors or a message if none found
-  return titlesWithColors.length > 0 ? titlesWithColors : [{ title: 'Нет доступных категорий', color: null }];
+  // If a valid category is found, return its title and color
+  return category ? { title: category.Title, color: category.Color } : null; // Return null if not found
 }
 
 function getOfferType(categoryIds) {
