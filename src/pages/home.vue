@@ -113,7 +113,7 @@ function getCategories(categoryIds) {
   // Map through the categoryIds to find matching categories
   const categoriesInfo = categoryIds.map(catId => {
     const category = categories.value.find(cat => cat.Id === catId.Id); // Find the category by Id
-    // Return title and color if the category exists and is not ID 1 or 2
+    // Return title and color if the category exists and is not ID 1 or ID 2
     return category && ![1, 2].includes(category.Id) ? { title: category.Title, color: category.Color } : null; 
   });
 
