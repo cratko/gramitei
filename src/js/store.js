@@ -79,12 +79,25 @@ const store = createStore({
     },
     firstLoad({state, dispatch}) {
       dispatch('auth')
-      dispatch('getCategories')
+      .then(() => {
+        dispatch('getCategories')
+        .then(() => {
+          const getOffersParams = new URLSearchParams({
+            sort_by: "rating",
+          })
+          dispatch('getOffers', getOffersParams)
+          .then(() => {
 
-      const getOffersParams = new URLSearchParams({
-        sort_by: "rating",
-    });
-      dispatch('getOffers', getOffersParams)
+          }).catch(error => {
+            throw new Error('Failed to fetch offers');
+          })
+        }).catch(error => {
+          throw new Error('Failed to fetch categories');
+        })
+      })
+      .catch(error => {
+        throw new Error('Failed to fetch auth');
+      })
     }
   },
   getters: {
