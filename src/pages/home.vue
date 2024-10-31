@@ -66,15 +66,13 @@
     >
       <f7-list-item-subtitle>
         <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
-        <template v-if="getCategories(offer.CategoryIds).length > 0">
-          <f7-badge
+        <f7-badge
             v-for="(item, index) in getCategories(offer.CategoryIds)" 
             :key="index"
             :color="item.color" 
           >
             {{ item.title }} <!-- Display each category title -->
           </f7-badge>
-        </template>
       </f7-list-item-subtitle>
       <template #after>
         <f7-badge :color="getBadgeColor(offer.OfferRating)">
@@ -114,7 +112,7 @@ console.log(offers.value)
 function getCategories(categoryIds) {
   // Map through the categoryIds to find matching categories
   const categoriesInfo = categoryIds.map(catId => {
-    const category = categories.value.find(cat => cat.Id === catId.Id);
+    const category = categories.value.find(cat => cat.Id === catId); // Find the category by Id
     return category ? { title: category.Title, color: category.Color } : null; // Return title and color or null
   });
 
