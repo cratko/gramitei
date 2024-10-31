@@ -119,7 +119,7 @@ function getCategory(categoryIds) {
   // Map filtered categories to include title and color
   const titlesWithColors = filteredCategories.map(cat => ({
     title: cat.Title,
-    color: cat.Color // Directly use the Color property from the category
+    color: categoryIds.find(catId => catId.Id === cat.Id)?.Color // Get color from categoryIds
   }));
 
   // Return titles and colors or a message if none found
