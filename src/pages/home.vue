@@ -65,7 +65,7 @@
       :link="`/dynamic-route/blog/${offer.OwnerId}/post/${offer.Uuid}/?foo=bar#about`"
     >
       <f7-list-item-subtitle>
-        <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
+        <f7-badge :color="getOfferType(offer.CategoryIds)[1]" >{{ getOfferType(offer.CategoryIds)[0] }}</f7-badge>
         <f7-badge
             v-for="(item, index) in getCategories(offer.CategoryIds)" 
             :key="index"
@@ -112,8 +112,9 @@ console.log(offers.value)
 function getCategories(categoryIds) {
   // Map through the categoryIds to find matching categories
   const categoriesInfo = categoryIds.map(catId => {
-    const category = categories.value.find(cat => cat.Id === catId); // Find the category by Id
-    return category ? { title: category.Title, color: category.Color } : null; // Return title and color or null
+    const category = categories.value.find(cat => cat.Id === catId.Id); // Find the category by Id
+    // Return title and color if the category exists and is not ID 1 or 2
+    return category && ![1, 2].includes(category.Id) ? { title: category.Title, color: category.Color } : null; 
   });
 
   // Filter out any null values (in case some IDs do not match any category)
@@ -124,13 +125,13 @@ function getOfferType(categoryIds) {
   // Check for category with ID 1
   const category1 = categories.value.find(cat => cat.Id === 1);
   if (categoryIds.includes(1) && category1) {
-    return category1.Title; // Return the title for ID 1
+    return [category1.Title, category1.Color]; // Return the title for ID 1
   }
 
   // Check for category with ID 2
   const category2 = categories.value.find(cat => cat.Id === 2);
   if (categoryIds.includes(2) && category2) {
-    return category2.Title; // Return the title for ID 2
+    return [category2.Title, category2.Color]; // Return the title for ID 2
   }
 
   return null; // Return null if neither category is found
