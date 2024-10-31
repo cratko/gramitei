@@ -111,8 +111,7 @@ function getBadgeColor(rating) {
 function getCategory(categoryIds) {
   // Find the first category that is not ID 1 or ID 2
   const category = categories.value.find(cat => 
-    categoryIds.some(catId => catId.Id === cat.Id) && // Check if categoryId matches
-    ![1, 2].includes(cat.Id) // Exclude categories with IDs 1 and 2
+    categoryIds.some(catId => catId.Id === cat.Id)
   );
 
   // If a valid category is found, return its title and color
