@@ -66,7 +66,7 @@
     >
       <f7-list-item-subtitle>
         <f7-badge>{{ getOfferType(offer.CategoryIds) }}</f7-badge>
-        <template v-if="getCategory(offer.CategoryIds).length > 0">
+        <template>
           <f7-badge
             v-for="(item, index) in getCategory(offer.CategoryIds)" 
             :key="index"
