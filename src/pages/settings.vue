@@ -1,86 +1,48 @@
 <template>
-  <f7-page name="settings">
-    <f7-navbar title="Settings"></f7-navbar>
-
-    <f7-block-title>Form Example</f7-block-title>
-    <f7-list strong-ios dividers-ios outline-ios>
-      <f7-list-input label="Name" type="text" placeholder="Your name"></f7-list-input>
-
-      <f7-list-input label="E-mail" type="email" placeholder="E-mail"></f7-list-input>
-
-      <f7-list-input label="URL" type="url" placeholder="URL"></f7-list-input>
-
-      <f7-list-input label="Password" type="password" placeholder="Password"></f7-list-input>
-
-      <f7-list-input label="Phone" type="tel" placeholder="Phone"></f7-list-input>
-
-      <f7-list-input label="Gender" type="select">
-        <option>Male</option>
-        <option>Female</option>
-      </f7-list-input>
-
-      <f7-list-input
-        label="Birth date"
-        type="date"
-        placeholder="Birth day"
-        defaultValue="2014-04-30"
-      ></f7-list-input>
-
-      <f7-list-item title="Toggle">
-        <template #after>
-          <f7-toggle />
-        </template>
-      </f7-list-item>
-
-      <f7-list-input label="Range" :input="false">
-        <template #input>
-          <f7-range :value="50" :min="0" :max="100" :step="1" />
-        </template>
-      </f7-list-input>
-
-      <f7-list-input type="textarea" label="Textarea" placeholder="Bio"></f7-list-input>
-      <f7-list-input type="textarea" label="Resizable" placeholder="Bio" resizable></f7-list-input>
-    </f7-list>
-
-    <f7-block-title>Buttons</f7-block-title>
-    <f7-block strong-ios outline-ios class="grid grid-cols-2 grid-gap">
-      <f7-button>Button</f7-button>
-      <f7-button fill>Fill</f7-button>
-
-      <f7-button raised>Raised</f7-button>
-      <f7-button raised fill>Raised Fill</f7-button>
-
-      <f7-button round>Round</f7-button>
-      <f7-button round fill>Round Fill</f7-button>
-
-      <f7-button outline>Outline</f7-button>
-      <f7-button round outline>Outline Round</f7-button>
-
-      <f7-button small outline>Small</f7-button>
-      <f7-button small round outline>Small Round</f7-button>
-
-      <f7-button small fill>Small</f7-button>
-      <f7-button small round fill>Small Round</f7-button>
-
-      <f7-button large raised>Large</f7-button>
-      <f7-button large fill raised>Large Fill</f7-button>
-
-      <f7-button large fill raised color="red">Large Red</f7-button>
-      <f7-button large fill raised color="green">Large Green</f7-button>
-    </f7-block>
-
-    <f7-block-title>Checkbox group</f7-block-title>
-    <f7-list strong-ios outline-ios dividers-ios>
-      <f7-list-item checkbox name="my-checkbox" value="Books" title="Books"></f7-list-item>
-      <f7-list-item checkbox name="my-checkbox" value="Movies" title="Movies"></f7-list-item>
-      <f7-list-item checkbox name="my-checkbox" value="Food" title="Food"></f7-list-item>
-    </f7-list>
-
-    <f7-block-title>Radio buttons group</f7-block-title>
-    <f7-list strong-ios outline-ios dividers-ios>
-      <f7-list-item radio name="radio" value="Books" title="Books"></f7-list-item>
-      <f7-list-item radio name="radio" value="Movies" title="Movies"></f7-list-item>
-      <f7-list-item radio name="radio" value="Food" title="Food"></f7-list-item>
-    </f7-list>
+  <f7-page>
+    <f7-navbar title="Infinite Virtual List"></f7-navbar>
+    <f7-list class="virtual-list" ref="virtualList"></f7-list>
   </f7-page>
 </template>
+
+<script>
+import { f7 } from 'framework7-vue';
+
+export default {
+  data() {
+    return {
+      items: [], // Массив для хранения элементов
+      totalItems: 10000, // Общее количество элементов
+      itemHeight: 63, // Высота одного элемента
+    };
+  },
+  mounted() {
+    this.loadItems(0, 20); // Загружаем первые 20 элементов
+    this.initializeVirtualList();
+  },
+  methods: {
+    loadItems(startIndex, count) {
+      for (let i = startIndex; i < startIndex + count && i < this.totalItems; i++) {
+        this.items.push({ title: `Item ${i + 1}`, subtitle: `Subtitle ${i + 1}` });
+      }
+    },
+    initializeVirtualList() {
+      const virtualList = f7.virtualList.create({
+        el: this.$refs.virtualList,
+        items: this.items,
+        itemHeight: this.itemHeight,
+        searchAll: (query, items) => {
+          // Функция поиска
+          return items.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
+        },
+        renderExternal: (vl, vlData) => {
+          // Обновление данных при прокрутке
+          if (vlData.items.length < this.totalItems) {
+            this.loadItems(vlData.items.length, 20); // Загружаем следующие 20 элементов
+          }
+        },
+      });
+    },
+  },
+};
+</script>
