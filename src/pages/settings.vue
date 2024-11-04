@@ -1,47 +1,106 @@
+
 <template>
   <f7-page name="Settings">
-    <f7-navbar title="Infinite Virtual List"></f7-navbar>
-    <f7-list class="virtual-list" ref="virtualList"></f7-list>
+    <f7-navbar title="Virtual List">
+      <f7-subnavbar :inner="false">
+        <f7-searchbar
+          search-container=".virtual-list"
+          search-item="li"
+          search-in=".item-title"
+        ></f7-searchbar>
+      </f7-subnavbar>
+    </f7-navbar>
+    <f7-block>
+      <p>
+        Virtual List allows to render lists with huge amount of elements without loss of
+        performance. And it is fully compatible with all Framework7 list components such as Search
+        Bar, Infinite Scroll, Pull To Refresh, Swipeouts (swipe-to-delete) and Sortable.
+      </p>
+      <p>Here is the example of virtual list with 10 000 items:</p>
+    </f7-block>
+    <f7-list strong outline-ios inset-md dividers-ios class="searchbar-not-found">
+      <f7-list-item title="Nothing found"></f7-list-item>
+    </f7-list>
+    <f7-list
+      strong
+      outline-ios
+      inset-md
+      dividers-ios
+      class="searchbar-found"
+      medial-list
+      virtual-list
+      :virtual-list-params="{
+        items,
+        searchAll,
+        renderExternal,
+        height: theme.ios ? 63 : theme.md ? 73 : 77,
+      }"
+    >
+      <ul>
+        <f7-list-item
+          v-for="(item, index) in vlData.items"
+          :key="index"
+          media-item
+          link="#"
+          :title="item.title"
+          :subtitle="item.subtitle"
+          :style="`top: ${vlData.topPosition}px`"
+          :virtual-list-index="item.index"
+        ></f7-list-item>
+      </ul>
+    </f7-list>
   </f7-page>
 </template>
-
 <script>
-import { f7 } from 'framework7-vue';
+import {
+  f7Navbar,
+  f7Page,
+  f7List,
+  f7ListItem,
+  f7Subnavbar,
+  f7Searchbar,
+  f7Block,
+  theme,
+} from 'framework7-vue';
 
 export default {
+  components: {
+    f7Navbar,
+    f7Page,
+    f7List,
+    f7ListItem,
+    f7Subnavbar,
+    f7Searchbar,
+    f7Block,
+  },
   data() {
+    const items = [];
+    for (let i = 1; i <= 10000; i += 1) {
+      items.push({
+        title: `Item ${i}`,
+        subtitle: `Subtitle ${i}`,
+        index: i,
+      });
+    }
     return {
-      items: [], // Массив для хранения элементов
-      totalItems: 10000, // Общее количество элементов
-      itemHeight: 63, // Высота одного элемента
+      theme,
+      items,
+      vlData: {
+        items: [],
+      },
     };
   },
-  mounted() {
-    this.loadItems(0, 20); // Загружаем первые 20 элементов
-    this.initializeVirtualList();
-  },
   methods: {
-    loadItems(startIndex, count) {
-      for (let i = startIndex; i < startIndex + count && i < this.totalItems; i++) {
-        this.items.push({ title: `Item ${i + 1}`, subtitle: `Subtitle ${i + 1}` });
+    searchAll(query, items) {
+      const found = [];
+      for (let i = 0; i < items.length; i += 1) {
+        if (items[i].title.toLowerCase().indexOf(query.toLowerCase()) >= 0 || query.trim() === '')
+          found.push(i);
       }
+      return found; // return array with matched indexes
     },
-    initializeVirtualList() {
-      const virtualList = f7.virtualList.create({
-        el: this.$refs.virtualList,
-        items: this.items,
-        itemHeight: this.itemHeight,
-        searchAll: (query, items) => {
-          // Функция поиска
-          return items.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
-        },
-        renderExternal: (vl, vlData) => {
-          // Обновление данных при прокрутке
-          if (vlData.items.length < this.totalItems) {
-            this.loadItems(vlData.items.length, 20); // Загружаем следующие 20 элементов
-          }
-        },
-      });
+    renderExternal(vl, vlData) {
+      this.vlData = vlData;
     },
   },
 };
