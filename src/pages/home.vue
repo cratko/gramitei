@@ -55,9 +55,15 @@
     </f7-block>
   -->
   <f7-block-title>Предложения</f7-block-title>
-  <f7-list strong inset dividersIos virtual-list>
+  <f7-list strong inset dividersIos virtual-list
+  :virtual-list-params="{
+    offers,
+    renderExternal,
+    height: theme.ios ? 63 : theme.md ? 73 : 77,
+  }">
     <f7-list-item
       v-for="offer in offers"
+      :key="offer.uuid"
       :virtual-list-index="offer.Uuid"
       :title="offer.Title"
       :text="offer.Description"
@@ -119,4 +125,7 @@ function getCategories(categoryIds) {
   return categoriesInfo.filter(info => info !== null);
 }
 
+function renderExternal(vl, vlData) {
+  console.log("Rendered")
+}
 </script>
