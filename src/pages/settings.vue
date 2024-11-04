@@ -101,7 +101,7 @@ export default {
     },
     renderExternal(vl, vlData) {
       this.vlData = vlData;
-      console.log(vl, vlData)
+      console.log(vl, vlData.items)
     },
   },
 };
