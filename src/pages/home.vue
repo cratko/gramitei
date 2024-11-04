@@ -55,10 +55,10 @@
     </f7-block>
   -->
   <f7-block-title>Предложения</f7-block-title>
-  <f7-list strong inset dividersIos>
+  <f7-list strong inset dividersIos virtual-list>
     <f7-list-item
       v-for="offer in offers"
-      :key="offer.Uuid"
+      :virtual-list-index="offer.Uuid"
       :title="offer.Title"
       :text="offer.Description"
       media-list
