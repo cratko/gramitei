@@ -98,7 +98,8 @@
   import {
   f7,
   useStore,
-  f7ready
+  f7ready,
+  ref
 } from 'framework7-vue';
 
 const offers = useStore('offersGetter')
