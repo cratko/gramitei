@@ -59,7 +59,7 @@
   :virtual-list-params="{
     items,
     renderExternal,
-    height: 66,
+    height: 500,
   }">
     <f7-list-item
       v-for="offer in offers"
