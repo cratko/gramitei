@@ -98,9 +98,9 @@
   import {
   f7,
   useStore,
-  f7ready,
-  ref
+  f7ready
 } from 'framework7-vue';
+import { ref, onMounted } from 'vue';
 
 const offers = useStore('offersGetter')
 const categories = useStore('categoriesGetter')
