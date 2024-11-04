@@ -57,7 +57,7 @@
   <f7-block-title>Предложения</f7-block-title>
   <f7-list strong inset dividersIos virtual-list
   :virtual-list-params="{
-    offers,
+    items,
     renderExternal,
     height: 3,
   }">
@@ -103,6 +103,8 @@
 
 const offers = useStore('offersGetter')
 const categories = useStore('categoriesGetter')
+const items = ref();
+items.value = offers.value;
 
 // Function to get badge color based on rating
 function getBadgeColor(rating) {
