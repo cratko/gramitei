@@ -1,5 +1,5 @@
 <template>
-  <f7-page>
+  <f7-page name="Settings">
     <f7-navbar title="Infinite Virtual List"></f7-navbar>
     <f7-list class="virtual-list" ref="virtualList"></f7-list>
   </f7-page>
