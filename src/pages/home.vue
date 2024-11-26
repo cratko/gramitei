@@ -55,7 +55,7 @@
     </f7-block>
   -->
   <f7-block-title>Предложения</f7-block-title>
-  <f7-list strong inset dividersIos virtual-list
+  <f7-list  inset dividersIos virtual-list
   :virtual-list-params="{
     items,
     renderExternal,
