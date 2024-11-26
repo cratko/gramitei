@@ -87,8 +87,6 @@
       </template>
     </f7-list-item>
   </f7-list>
-    {{ offers }}
-    {{ categories }}
   </f7-page>
 
 </template>
