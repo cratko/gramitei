@@ -3,7 +3,7 @@
     <f7-navbar>
       <f7-nav-title>Gramitei <span class="subtitle-nav">Menu</span></f7-nav-title>
       <f7-nav-right>
-        <f7-link icon-ios="f7:add" icon-md="material:add" panel-open="right"></f7-link>
+        
       </f7-nav-right>
     </f7-navbar>
     <f7-block>
