@@ -85,6 +85,7 @@
           <f7-icon material="star" size="13px"></f7-icon>
         </f7-badge> <!-- Move badge here -->
       </template>
+      <hr>
     </f7-list-item>
   </f7-list>
   </f7-page>
