@@ -55,7 +55,7 @@
     </f7-block>
   -->
   <f7-block-title>Предложения</f7-block-title>
-  <f7-list virtual-list
+  <f7-list dividers-ios strong virtual-list
   :virtual-list-params="{
     items,
     renderExternal,
@@ -85,7 +85,6 @@
           <f7-icon material="star" size="13px"></f7-icon>
         </f7-badge> <!-- Move badge here -->
       </template>
-      <hr>
     </f7-list-item>
   </f7-list>
   </f7-page>
