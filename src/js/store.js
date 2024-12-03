@@ -57,7 +57,7 @@ const store = createStore({
       });
     },
     getOffers({ state }, params) {
-      return fetch(url + `private/offers/getOffers?${params.toString()}`, {
+      return fetch(url + `private/offers/getOffersBySearch?${params.toString()}`, {
         method: "get",
         headers: {
           'Accept': 'application/json',
