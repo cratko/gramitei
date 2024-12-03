@@ -14,7 +14,7 @@ const store = createStore({
   },
   actions: {
     auth({ state }) {
-      return fetch(url + 'public/user/auth', {
+      return fetch(url + 'public/user/authByTelegram', {
         method: "post",
         headers: {
           'Accept': 'application/json',
